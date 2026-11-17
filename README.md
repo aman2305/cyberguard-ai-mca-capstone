@@ -30,7 +30,7 @@ C:\Python312-x64\python.exe -m venv .venv-x64
 .\.venv-x64\Scripts\python.exe -m streamlit run app.py
 ```
 
-Confirm the environment reports `win-amd64` with ` .\.venv-x64\Scripts\python.exe -c "import sysconfig; print(sysconfig.get_platform())"`. If an existing Streamlit server is using the mismatched `.venv`, stop that server before replacing the environment.
+Confirm the environment reports `win-amd64` with `\.venv-x64\Scripts\python.exe -c "import sysconfig; print(sysconfig.get_platform())"`. If an existing Streamlit server is using the mismatched `.venv`, stop that server before replacing the environment.
 
 ## Dataset setup
 If the real CICIDS2017 CSVs are not in `data/`, place them there as `.csv` files and follow the instructions in `data/README.md`.
