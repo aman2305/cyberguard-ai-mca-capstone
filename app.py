@@ -300,7 +300,12 @@ elif page == 'Model Training':
         if result:
             try:
                 with st.spinner('Fitting pipeline and evaluating the held-out test set...'):
-                    training_result = train_model(DATA_DIR, synthetic=bool(st.session_state.get('dataset_is_synthetic')))
+                    training_result = train_model(
+                        DATA_DIR,
+                        synthetic=bool(st.session_state.get('dataset_is_synthetic')),
+                        dataset=dataset,
+                        dataset_sources=st.session_state.get('dataset_sources'),
+                    )
                 st.session_state.model = training_result['model']
                 st.session_state.metadata = training_result['metadata']
                 st.session_state.outputs = training_result

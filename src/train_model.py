@@ -2,7 +2,7 @@ import json
 import logging
 import time
 from pathlib import Path
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 
 import joblib
 import pandas as pd
@@ -15,8 +15,18 @@ from src.preprocessing import build_pipeline, clean_dataset, prepare_feature_mat
 logger = logging.getLogger(__name__)
 
 
-def train_model(data_dir: Path = DATA_DIR, synthetic: bool = False, max_rows_per_file: Optional[int] = None) -> Dict[str, object]:
-    dataset, source_files = load_dataset(data_dir, max_rows_per_file=max_rows_per_file)
+def train_model(
+    data_dir: Path = DATA_DIR,
+    synthetic: bool = False,
+    max_rows_per_file: Optional[int] = None,
+    dataset: Optional[pd.DataFrame] = None,
+    dataset_sources: Optional[List[str]] = None,
+) -> Dict[str, object]:
+    if dataset is None:
+        dataset, source_files = load_dataset(data_dir, max_rows_per_file=max_rows_per_file)
+    else:
+        dataset = dataset.copy()
+        source_files = list(dataset_sources or [])
     if dataset.empty:
         raise ValueError('No CSV files were found in the dataset directory.')
 
